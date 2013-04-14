@@ -9,11 +9,7 @@ SimpleWeek is a quick and dirty mod of the Simplicity & Complexity watch face fo
 It has been translated to Dutch, and items slightly repositioned / reformatted.
 The text for week/date/weekday is only redrawn if changed to conserve juice.
 
-
-### Install the watch face from github, via http:
-
-Click this url with your mobile phone's browser:
-
+Binary release:
 https://github.com/atkaper/pebble-simpleweek-nl/raw/master/releases/simpleweek.pbw
 
 
