@@ -1,35 +1,47 @@
-## SimpleWeek (dutch)
+## SimpleWeek (german)
 
-![Action shot](https://raw.github.com/atkaper/pebble-simpleweek-nl/master/releases/simpleweek.png)
+Based on SimpleWeek (dutch):
+https://github.com/atkaper/pebble-simpleweek-nl
 
 Based on Simplicity & Complexity.
 
-
-SimpleWeek is a quick and dirty mod of the Simplicity & Complexity watch face for Pebble which adds Week Day and Week Number to the main screen.
-It has been translated to Dutch, and items slightly repositioned / reformatted.
-The text for week/date/weekday is only redrawn if changed to conserve juice.
-
 Binary release:
-https://github.com/atkaper/pebble-simpleweek-nl/raw/master/releases/simpleweek.pbw
+https://github.com/hhurz/pebble-simpleweek-de/raw/master/releases/simpleweek-de.pbw
 
 
 ### Building the watch face
 
-First, create a new project with the `create_pebble_project.py` script included in the [Pebble SDK](http://developer.getpebble.com).
+Open a terminal window in the directory where you installed the SDK and change to the watches directory with this command:
 
-    cd <parent dir of project root>
+    cd <sdk_path>/watches/
+    
+Recreate the symlinks to the SDK files with this command:
+    
+    ../tools/create_pebble_project.py --symlink-only ../sdk/ simpleweek-de
+    
+Configure the project using these commands:
 
-    /<sdk_path>/tools/create_pebble_project.py --symlink-only /<sdk_path>/sdk/ simpleweek
-
-    cd simpleweek
+    cd simpleweek-de
 
     ./waf configure build
+
+Build the project using this command:
+
+    ./waf build
+
+
+### Install the watch face using dropbox (Android only)
+
+    Copy simpleweek-de.pbw from <sdk_path>/watches/simpleweek-de/build to a dropbox folder
+
+    Use your phone's dropbox app to download simpleweek-de.pbw to your phone
+
 
 ### Install the watch face using libpebble
 
 First, make sure [libpebble](https://github.com/pebble/libpebble) is set up and running properly. Then:
 
-    /<libpebble_path>/p.py --pebble_id <PEBBLE_ID_OR_MAC_ADDRESS> --lightblue load simpleweek.pbw
+    /<libpebble_path>/p.py --pebble_id <PEBBLE_ID_OR_MAC_ADDRESS> --lightblue load simpleweek-de.pbw
 
 
 ### Install the watch face using http server
