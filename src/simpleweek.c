@@ -2,8 +2,8 @@
 #include "pebble_app.h"
 #include "pebble_fonts.h"
 
-#define MY_UUID { 0xDA, 0xEC, 0xA1, 0xDB, 0xBD, 0xE5, 0xE1, 0xFC, 0xA7, 0xC5, 0x33, 0xD2, 0xAD, 0x7E, 0x46, 0x76 }
-PBL_APP_INFO(MY_UUID, "SimpleWeek", "TK; based on Complexity", 2, 0 /* App version */, RESOURCE_ID_IMAGE_MENU_ICON, APP_INFO_WATCH_FACE);
+#define MY_UUID { 0xD2, 0x2B, 0xAF, 0x20, 0x39, 0xCA, 0x4F, 0x37, 0xB9, 0xF1, 0x1E, 0xDE, 0x03, 0x64, 0xE3, 0x22 }
+PBL_APP_INFO(MY_UUID, "SimpleWeek", "hhurz", 2, 0 /* App version */, RESOURCE_ID_IMAGE_MENU_ICON, APP_INFO_WATCH_FACE);
 
 Window window;
 
@@ -15,12 +15,12 @@ TextLayer text_time_layer;
 Layer line_layer;
 
 static const char *day_names[] = {
-  "Zondag", "Maandag", "Dinsdag", "Woensdag", "Donderdag", "Vrijdag", "Zaterdag"
+  "Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag"
 };
 
 static const char *month_names[] = {
-  "Januari", "Februari", "Maart", "April", "Mei", "Juni", 
-  "Juli", "Augustus", "September", "Oktober", "November", "December"
+  "Januar", "Februar", "März", "April", "Mai", "Juni",
+  "Juli", "August", "September", "Oktober", "November", "Dezember"
 };
 
 void line_layer_update_callback(Layer *me, GContext* ctx) {
@@ -37,25 +37,26 @@ void update_display(PblTm *tick_time) {
   // Need to be static because they're used by the system later.
   static char time_text[]     = "00:00";
   static char day_text[]      = "                  ";
-  static char week_text[]     = "W00";
+  static char week_text[]     = "KW00";
   static char date_text[]     = "                  ";
   static char new_date_text[] = "                  ";
 
   int month = tick_time->tm_mon;
-  string_format_time(new_date_text, sizeof(date_text), "%e ", tick_time);
+  string_format_time(new_date_text, sizeof(date_text), "%e", tick_time);
+  strcat(new_date_text, ". ");
   strcat(new_date_text, month_names[month]);
 
   // Only update the date/day/week strings when they're changed.
   if (strncmp(new_date_text, date_text, sizeof(date_text)) != 0) {
-	  string_format_time(week_text, sizeof(week_text), "W%V", tick_time);
-	  text_layer_set_text(&text_week_layer, week_text);
+    string_format_time(week_text, sizeof(week_text), "KW%V", tick_time);
+    text_layer_set_text(&text_week_layer, week_text);
 
-	  int dayofweek = tick_time->tm_wday;
-	  strcpy(day_text, day_names[dayofweek]);
-	  text_layer_set_text(&text_day_layer, day_text);
+    int dayofweek = tick_time->tm_wday;
+    strcpy(day_text, day_names[dayofweek]);
+    text_layer_set_text(&text_day_layer, day_text);
 
-	  strncpy(date_text, new_date_text, sizeof(date_text));
-	  text_layer_set_text(&text_date_layer, date_text);
+    strncpy(date_text, new_date_text, sizeof(date_text));
+    text_layer_set_text(&text_date_layer, date_text);
   }
 
   char *time_format;
@@ -143,4 +144,3 @@ void pbl_main(void *params) {
   };
   app_event_loop(params, &handlers);
 }
-
