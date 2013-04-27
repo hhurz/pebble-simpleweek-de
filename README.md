@@ -23,7 +23,7 @@ Configure the project using these commands:
 
     cd simpleweek-de
 
-    ./waf configure build
+    ./waf configure
 
 Build the project using this command:
 
